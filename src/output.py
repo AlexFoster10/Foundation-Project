@@ -14,8 +14,9 @@ def output_csv(df, path="./data/processed/processed_data.csv"):
         df.to_csv(path)
         main_logger.info(f"Successfully output CSV file: {path}")
     except Exception as e:
-        logger.error(f"Error outputting CSV file: {e}")
-        main_logger.error(f"Error outputting CSV file: {e}")
+        logger.error(f"Error outputting CSV file, default destination used: {e}")
+        main_logger.error(f"Error outputting CSV file, default destination used: {e}")
+        df.to_csv("./data/processed/processed_data_def.csv")
 
 
 
