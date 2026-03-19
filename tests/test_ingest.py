@@ -1,5 +1,5 @@
 import unittest
-import ingest
+from src import ingest
 import pandas as pd
 
 class TestIngest(unittest.TestCase):

@@ -1,9 +1,9 @@
 import pandas as pd
 import logging
 import numpy as np
-import logging_config
-from logging_config import main_logger
-logger = logging_config.setup_logger('processing_logger', './tests/logs/processing.log')
+from . import  logging_config
+from  .logging_config import main_logger
+logger =  logging_config.setup_logger('processing_logger', './tests/logs/processing.log')
 
 
 def daily_return(df):

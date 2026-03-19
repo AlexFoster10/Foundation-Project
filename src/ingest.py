@@ -1,10 +1,8 @@
 import pandas as pd
-import logging
-import logging_config
-from logging_config import main_logger
+from . import  logging_config
+from  .logging_config import main_logger
 
-
-logger = logging_config.setup_logger('ingest_logger', './tests/logs/ingest.log')
+logger =  logging_config.setup_logger('ingest_logger', './tests/logs/ingest.log')
 
 def ingest_csv(path="./data/raw/marketData2.csv"):
 
