@@ -14,3 +14,7 @@ class TestIngest(unittest.TestCase):
         df = ingest.ingest_csv("app/data/raw/nonexistent.csv")
         self.assertIsInstance(df, pd.DataFrame)
         self.assertFalse(df.empty)
+
+
+if __name__ == '__main__':
+    unittest.main()
