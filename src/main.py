@@ -10,7 +10,7 @@ def main():
     df = processing.price_spread(df)
     #df = processing.simple_moving_average(df,5)
     df = processing.volume_change(df)
-    output.output_csv(df)
+    output.output_csv(df,"./data/processed/processed_data.csv")
 
 
 if __name__ == "__main__":
