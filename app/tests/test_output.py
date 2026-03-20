@@ -1,3 +1,8 @@
+import pathlib
+import sys
+temp = pathlib.Path(__file__).parent.parent.parent.resolve().as_posix()
+sys.path.append(temp)
+
 import unittest
 from app.src import output
 import pandas as pd
