@@ -29,7 +29,6 @@ def price_spread(df):
         return df
 
 
-##not finished yet dont fully understand SMA
 def simple_moving_average(df, window):
     try:
         df['simple_moving_average'] = df.groupby('ticker')['close'].rolling(window=window).mean().reset_index(0, drop=True)

@@ -31,6 +31,21 @@ class TestProcessing(unittest.TestCase):
             expected_spread = row['high'] - row['low']
             self.assertAlmostEqual(result_df.loc[index, 'price_spread'], expected_spread)
 
+    def test_simple_moving_average(self):
+        result_df = processing.simple_moving_average(df, window=3)
+
+        # Test each row comparing the calculated simple moving average with the expected value
+        for index, row in df.iterrows():
+            if index < 2:  # The first two rows should have NaN for a window of 3
+                self.assertTrue(pd.isna(result_df.loc[index, 'simple_moving_average']))
+            else:
+                if df.loc[index, 'ticker'] != df.loc[index - 1, 'ticker'] or df.loc[index - 1, 'ticker'] != df.loc[index - 2, 'ticker']:
+                    self.assertTrue(pd.isna(result_df.loc[index, 'simple_moving_average']))
+                else:
+                    expected_sma = df.loc[index-2:index, 'close'].mean()
+                    self.assertAlmostEqual(result_df.loc[index, 'simple_moving_average'], expected_sma)
+         
+
     # Test volume_change function
     def test_volume_change(self):
         result_df = processing.volume_change(df)
