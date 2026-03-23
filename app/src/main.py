@@ -3,7 +3,7 @@ import sys
 temp = pathlib.Path(__file__).parent.parent.parent.resolve().as_posix()
 sys.path.append(temp)
 
-from app.src import validate,  ingest,  processing,  output
+from app.src import validate,  ingest,  processing,  output, database
 import pandas as pd
 import logging
 import matplotlib.pyplot as plt
@@ -43,6 +43,9 @@ def main():
     plt.ylabel("Close Price")
     plt.xticks(rotation=20)
     plt.savefig("app/data/plots/processed_data.png")
+
+    database.create_new_table(df)
+
 
 
 if __name__ == "__main__":
