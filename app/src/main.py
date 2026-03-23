@@ -1,5 +1,7 @@
 import pathlib
 import sys
+
+from fastapi.responses import HTMLResponse
 temp = pathlib.Path(__file__).parent.parent.parent.resolve().as_posix()
 sys.path.append(temp)
 
@@ -7,7 +9,7 @@ from app.src import validate,  ingest,  processing,  output, database
 import pandas as pd
 import logging
 import matplotlib.pyplot as plt
-import fastapi
+from fastapi import FastAPI
 import yaml
 
 # Set up logging
@@ -61,3 +63,15 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+app = FastAPI()
+
+
+@app.get("/")
+async def root(response_class=HTMLResponse):
+    df = ingest.ingest_csv("app/data/processed/processed_data.csv")
+    html = df.to_html()
+    return HTMLResponse(content=html, status_code=200)
