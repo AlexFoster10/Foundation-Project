@@ -44,7 +44,7 @@ def main():
     plt.xticks(rotation=20)
     plt.savefig("app/data/plots/processed_data.png")
 
-    database.create_new_table(df)
+    database.append_to_table(df)
 
 
 
