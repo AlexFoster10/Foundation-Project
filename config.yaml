@@ -1,0 +1,6 @@
+database:
+  path: "app/data/databases/processed_data.db"
+  table_name: "processed_data"
+
+default_csv_path_in: "app/data/raw/marketData2.csv"
+default_csv_path_out: "app/data/processed/processed_data.csv"

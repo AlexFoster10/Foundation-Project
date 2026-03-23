@@ -2,9 +2,14 @@ import pandas as pd
 import logging
 from  .logging_config import main_logger
 from . import  logging_config
+import yaml
+
+with open("config.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
 
 logger =  logging_config.setup_logger('output_logger', 'app/tests/logs/output.log')
-def output_csv(df, path="app/data/processed/processed_data.csv"):
+def output_csv(df, path=config['default_csv_path_out']):
 
     if not path:
         path = input("Enter the path to save the output CSV file (default: app/data/processed/processed_data.csv): ")
@@ -15,7 +20,7 @@ def output_csv(df, path="app/data/processed/processed_data.csv"):
     except Exception as e:
         logger.error(f"Error outputting CSV file, default destination used: {e}")
         main_logger.error(f"Error outputting CSV file, default destination used: {e}")
-        df.to_csv("app/data/processed/processed_data_def.csv", index=False)
+        df.to_csv(config['default_csv_path_out'], index=False)
 
 
 
