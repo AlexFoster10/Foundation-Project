@@ -8,6 +8,7 @@ logger =  logging_config.setup_logger('processing_logger', 'app/tests/logs/proce
 
 def daily_return(df):
     try:
+        # Calculate the daily return for each stock and add it as a new column in the DataFrame
         df['daily_return'] = (df['close'] - df['open']) / df['open']
         main_logger.info("Successfully calculated daily return")
         return df
@@ -19,6 +20,7 @@ def daily_return(df):
     
 def price_spread(df):
     try:
+        # Calculate the price spread for each stock and add it as a new column in the DataFrame
         df['price_spread'] = df['high'] - df['low']
         main_logger.info("Successfully calculated price spread")
         return df
@@ -31,6 +33,7 @@ def price_spread(df):
 
 def simple_moving_average(df, window):
     try:
+        # Calculate the simple moving average for each stock and add it as a new column in the DataFrame
         df['simple_moving_average'] = df.groupby('ticker')['close'].rolling(window=window).mean().reset_index(0, drop=True)
         return df
     except Exception as e:
@@ -41,6 +44,7 @@ def simple_moving_average(df, window):
     
 def volume_change(df):
     try:
+        # Calculate the volume change for each stock and add it as a new column in the DataFrame
         groups = df.groupby('ticker')
         df['volume_change'] = groups['volume'].pct_change()
         main_logger.info("Successfully calculated volume change")

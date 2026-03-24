@@ -13,7 +13,9 @@ with open("config.yaml", "r") as f:
     config = yaml.safe_load(f)
 
 
+# Database functions
 def create_new_table(df : pd.DataFrame, db_name=config['database']['path'], table_name=config['database']['table_name']):
+    # Create a new table in the database and insert data from the DataFrame
     try:
         conn = sqlite3.connect(db_name)
         df.to_sql(table_name, conn, if_exists='replace', index=False)
@@ -27,6 +29,7 @@ def create_new_table(df : pd.DataFrame, db_name=config['database']['path'], tabl
 
 
 def append_to_table(df : pd.DataFrame, db_name=config['database']['path'], table_name=config['database']['table_name']):
+    # Append data from the DataFrame to an existing table in the database
     try:
         conn = sqlite3.connect(db_name)
         df.to_sql(table_name, conn, if_exists='append', index=False)
